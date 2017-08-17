@@ -2,7 +2,7 @@
 ## Usage
 __RxLocalization__ allows you to easily localize your application with Rx. You will never care again about complexity of user-driven language changes.
 
-You define your `Localizable.strings` as always. Bu instead of 
+Define your `Localizable.strings` as always. But instead of 
 
 ```swift
 @IBOutlet weak var doneButton: UIBarButtonItem!
