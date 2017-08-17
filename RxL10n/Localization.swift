@@ -9,6 +9,11 @@
 import Foundation
 import RxSwift
 
+
+/// Creates an observable for given localization key.
+///
+/// - Parameter key: Localization key.
+/// - Returns: Observable of the key translation in current localization.
 public func L(_ key: String) -> Observable<String> {
     return Localization
         .current
@@ -16,15 +21,21 @@ public func L(_ key: String) -> Observable<String> {
         .map { $0.localize(key) }
 }
 
+/// Encapsulates current localization of the application.
 public class Localization {
 
+    /// Current localization.
     public static var current = Variable(Localization.auto())
 
+    /// ISO language code.
     public let langCode: String
 
     var base: [String: String]
     var lang: [String: String]
 
+    /// Desired constructor
+    ///
+    /// - Parameter langCode: ISO language code.
     public init(langCode: String) {
         self.langCode = langCode
 
@@ -50,6 +61,9 @@ public class Localization {
         return l
     }
 
+    /// Create localization from current user locale.
+    ///
+    /// - Returns: Created localization.
     public static func auto() -> Localization {
         return Localization(langCode: Locale.preferredLanguages.first ?? "en")
     }
