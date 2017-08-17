@@ -7,19 +7,36 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxL10n
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var label: UILabel!
+
+    private let disposeBag = DisposeBag()
+    
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    @IBOutlet weak var steper: UIStepper!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        Observable.combineLatest(L("STR_N_LABELS"), steper.rx.value)
+            .map { String(format: $0, Int($1)) }
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(label.rx.text)
+            .disposed(by: disposeBag)
+
+        L("STR_DONE")
+            .bind(to: doneButton.rx.title)
+            .disposed(by: disposeBag)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

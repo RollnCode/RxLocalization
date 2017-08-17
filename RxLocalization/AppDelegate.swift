@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxL10n
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,8 +16,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        runLocaleChanges()
         return true
+    }
+
+    func runLocaleChanges() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            Localization.current.value = Localization(langCode: "uk")
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
+            Localization.current.value = Localization(langCode: "pl")
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
+            Localization.current.value = Localization(langCode: "en")
+            self.runLocaleChanges()
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

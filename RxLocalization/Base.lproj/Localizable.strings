@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  RxLocalization
+
+  Created by Vitalii Yevtushenko on 8/17/17.
+  Copyright © 2017 Roll'n'Code. All rights reserved.
+*/
+
+STR_DONE = "Done";
+STR_N_LABELS = "%d labels";
